@@ -7,7 +7,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
     <meta name="description" content="Kenzie" />
     <meta name="author" content="Kenzie" />
     <meta name="keywords" content="Kenzie" />
@@ -22,20 +21,60 @@
   <body>
     <h1>Kenzie Docs</h1>
 
+    <!-- Word Counter -->
+
+    <textarea id="word" oninput="countWord()" rows="10" cols="120"></textarea>
+    
+    <br><br>
+
+<h2 class="vowelCounter">Vowel Counts:
+    <span id="show">0</span>
+</h2>
+
+<script>
+  function countWord() {
+
+      // Get the input text value
+      let words = document
+          .getElementById("word").value;
+
+      // Initialize the word counter
+      let count = 0;
+
+      // Split the words on each
+      // space character
+      let split = words.split('');
+
+      // Loop through the words and
+      // increase the counter when
+      // each split word is not empty
+      for (let i = 0; i < split.length; i++) {
+          if (split[i] != "") {
+              count += 1;
+          }
+      }
+
+      // Display it as output
+      document.getElementById("show")
+          .innerHTML = count;
+  }
+</script>
+
     <div class="content">
-    <button id="testButton">Test button</button>
-      <textarea id="text">Hello! Welcome to Kenzie.  My name is Robert, and I'm here with my friend Waldo.  Have you met waldo?</textarea>
+    <!-- <button id="testButton">Test button</button> -->
+      
     </div>
 
     <div id="results">
 
-      <div id="vowelCounts"><h2>Vowel Counts</h2>
+      <p div id="vowelCounts"><h2></h2>
         <div id="a">a:</div>
         <div id="e">e:</div>
         <div id="i">i:</div>
         <div id="o">o:</div>
         <div id="u">u:</div>
       </div>
+      </p>
 
       <div id="punctuationCounts"><h2>Punctuation Counts</h2></div>
 
@@ -56,11 +95,6 @@
 
     </div>
 
-
-
-
-
-    <div id="results"></div>
     <script src="code.js"></script>
   </body>
 </html>
