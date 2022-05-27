@@ -38,6 +38,8 @@ function handleKeyUp(event) {
     result.vowels = getVowelsObject(text)
     result.punctuation = getPunctuationObject(text)
     result.numWords = wordsArray.length
+    result.longestWord = getLongestWord(wordsArray)
+    result.shortestWord = getShortestWord(wordsArray)
     result.lastThreeWords = wordsArray.slice(-3)
     // console.log(wordsArray)
     console.log(result)
@@ -118,6 +120,16 @@ function getWordsArray(dataString) {
         }
     }
     return filteredArray
+}
+
+function getLongestWord(words) {
+    let sortedWords = words.sort( (wordA, wordB) => wordB.length - wordA.length )
+    return sortedWords[0]
+}
+
+function getShortestWord(words) {
+    let sortedWords = words.sort( (wordA, wordB) => wordA.length - wordB.length )
+    return sortedWords[0]
 }
 
 textArea.addEventListener("keyup", handleKeyUp)
