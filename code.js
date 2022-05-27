@@ -43,8 +43,7 @@ function handleKeyUp(event) {
     result.lastThreeWords = wordsArray.slice(-3)
     result.waldoIndexes = getWaldoIndices(text)
     // console.log(wordsArray)
-    // console.log(result)
-    renderData(result)
+    console.log(result)
 }
 
 // Inside a function we created a Switch case.
@@ -58,7 +57,7 @@ function getVowelsObject(dataString) {
     let vowelCounts = {}
     for (let i = 0; i < dataString.length; i += 1) {
         let currentChar = dataString[i]
-        console.log(currentChar)
+        // console.log(currentChar)
         switch (currentChar) {
             case "a":
             case "e":
@@ -148,50 +147,6 @@ function getWaldoIndices(dataString) {
         searchIndex = i + searchString.length
     }
     return indices
-}
-
-function renderData (dataObject) {
-    let container = document.getElementById("div")
-    container.classList.add("container")
-
-    let title = document.getElementById("h2")
-    title.append("Text Analysis")
-    container.append(title)
-    
-    let columnContainer = document.createElement("div")
-    columnContainer.classList.add("columnContainer")
-    container.append(columnContainer)
-
-    let leftColumn = document.createElement("div")
-    leftColumn.classList.add("column")
-    columnContainer.append(leftColumn)
-
-
-    let rightColumn = document.createElement("div")
-    rightColumn.classList.add("column")
-    columnContainer.append(rightColumn)
-
-    let vowels = document.createElement("div")
-    vowels.classList.add("column")
-    leftColumn.append(vowels)
-    
-    let vowelTitle = document.createElement("h3")
-    vowelTitle.append("Vowel Counts")
-    vowels.append(vowelTitle)
-
-    vowels.append(displayObject(dataObject.vowels))
-    
-    results.append(container)
-}
-
-function displayObject (obj) {
-    let list = document.createElement("ul")
-    for (let property in obj) {
-        let listItem = document.createElement("li")
-        listItem.append(`${property}: ${obj[property]}`)
-        list.append(listItem)
-    }
-    return list
 }
 
 textArea.addEventListener("keyup", handleKeyUp)
