@@ -41,6 +41,7 @@ function handleKeyUp(event) {
     result.longestWord = getLongestWord(wordsArray)
     result.shortestWord = getShortestWord(wordsArray)
     result.lastThreeWords = wordsArray.slice(-3)
+    result.waldoIndexes = getWaldoIndices(text)
     // console.log(wordsArray)
     console.log(result)
 }
@@ -123,13 +124,26 @@ function getWordsArray(dataString) {
 }
 
 function getLongestWord(words) {
-    let sortedWords = words.sort( (wordA, wordB) => wordB.length - wordA.length )
+    let sortedWords = [...words].sort( (wordA, wordB) => wordB.length - wordA.length )
     return sortedWords[0]
 }
 
 function getShortestWord(words) {
-    let sortedWords = words.sort( (wordA, wordB) => wordA.length - wordB.length )
+    let sortedWords = [...words].sort( (wordA, wordB) => wordA.length - wordB.length )
     return sortedWords[0]
+}
+
+function getWaldoIndices(dataString) {
+    let indices = []
+    let searchString = "waldo"
+    let lowerCaseString = dataString.toLowerCase()
+    let searchIndex = 0
+    let i
+    while ((i = lowerCaseString.indexOf(searchString, searchIndex)) > -1) {
+        indices.push(i)
+        searchIndex = i + searchString.length
+    }
+    return indices
 }
 
 textArea.addEventListener("keyup", handleKeyUp)
