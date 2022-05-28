@@ -3,6 +3,9 @@ let results = document.getElementById("results");
 
 // Your Code Here.
 
+// All credits go to Jon Taylor (facilitator) for creating the DataTypes Walkthrough.
+// Thank you.
+
 function handleKeyUp(event) {
     let text = textArea.value
     let wordsArray = getWordsArray(text)
