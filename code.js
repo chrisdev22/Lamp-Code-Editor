@@ -163,14 +163,14 @@ function renderData (dataObject) {
     vowelTitle.append("Vowel Counts")
     vowels.append(vowelTitle)
 
-    vowels.append(displayObject(dataObject.vowels))
+    vowels.append(displayObject(dataObject.vowels));
    
     results.append(container)
 }
 
 function displayObject (obj) {
     let list = document.createElement("ul")
-    for( let property of obj) {
+    for( let property in obj) {
         let listItem = document.createElement("div")
         listItem.append(`${property}: ${obj[property]}`)
         list.append.apply(listItem)
