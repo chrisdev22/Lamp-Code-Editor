@@ -37,8 +37,8 @@ function handleKeyUp(event) {
     result.shortestWord = getShortestWord(wordsArray)
     result.lastThreeWords = wordsArray.slice(-3)
     result.waldoIndexes = getWaldoIndices(text)
-    // console.log(wordsArray)
     // console.log(result)
+    // console.log(wordsArray)
     renderData(result)
 }
 
@@ -86,7 +86,7 @@ function getPunctuationObject(dataString) {
                 punctuationCounts["Exclamation Points"] += 1
                 break;
             case "?":
-                punctuationCounts["Question Marks"] += 1
+                punctuationCounts["Questions Marks"] += 1
                 break;
         }
     }
@@ -136,6 +136,10 @@ function getWaldoIndices(dataString) {
     return indices
 }
 
+// Bug Error: container.classList.add("container") while reading "vowels".
+// Solution: renderData(result). It fixes the bug easily.
+// All Credits go to Jon Taylor who found the solution.
+
 function renderData (dataObject) {
     results.replaceChildren()
 
@@ -165,8 +169,6 @@ function renderData (dataObject) {
     let vowelTitle = document.createElement("h3")
     vowelTitle.append("Vowel Counts")
     vowels.append(vowelTitle)
-
-    vowels.append(displayObject(dataObject.vowels))
     
     let punctuation = document.createElement("div")
     punctuation.classList.add("column")
@@ -175,8 +177,6 @@ function renderData (dataObject) {
     let punctTitle = document.createElement("h3")
     punctTitle.append("Punctuation Counts")
     punctuation.append(punctTitle)
-
-    punctuation.append(displayObject(dataObject.punctuation))
 
     let numOfChars = document.createElement("h3")
     numOfChars.append(`Number of Characters: ${dataObject.numCharacters}`)
@@ -201,16 +201,24 @@ function renderData (dataObject) {
     let waldos = document.createElement("h3")
     waldos.append(`Waldo Indexes: ${dataObject.waldoIndexes}`)
     rightColumn.append(waldos)
+
+    vowels.append(displayObject(dataObject.vowels))
+
+    punctuation.append(displayObject(dataObject.punctuation))
     
     results.append(container)
 }
 
+// Bug error: Typo "lil". VSCode IntelliSense adding append.apply automatically.
+// Solution: Fixed and erased "lil" to create the unordered list with only "li".
+// VSCode IntelliSense tends to add append.apply. Don't add apply erase it. "Only append".
+
 function displayObject (obj) {
     let list = document.createElement("ul")
-    for( let property in obj) {
-        let listItem = document.createElement("div")
+    for(let property in obj) {
+        let listItem = document.createElement("li")
         listItem.append(`${property}: ${obj[property]}`)
-        list.append.apply(listItem)
+        list.append(listItem)
     }
     return list 
 }
