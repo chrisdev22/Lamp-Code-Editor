@@ -3,12 +3,7 @@ let results = document.getElementById("results");
 
 // Your Code Here.
 
-// Initial Object to store information
-
-// All credits go to Jon Taylor who made the DataTypes walkthrough video
-
 function handleKeyUp(event) {
-
     let text = textArea.value
     let wordsArray = getWordsArray(text)
     let result = {
@@ -42,15 +37,9 @@ function handleKeyUp(event) {
     result.shortestWord = getShortestWord(wordsArray)
     result.lastThreeWords = wordsArray.slice(-3)
     result.waldoIndexes = getWaldoIndices(text)
-    // console.log(wordsArray)
-    console.log(result)
+    // console.log(result)
+    renderData(result)
 }
-
-// Inside a function we created a Switch case.
-// *To make this run the project build.
-// result.variabl must be invoked below the handleKeyUp function.*
-// This is where I got the a-ha moment.
-// I thought that the for loop was enough.
 
 function getVowelsObject(dataString) {
     dataString = dataString.toLowerCase()
@@ -133,9 +122,6 @@ function getShortestWord(words) {
     return sortedWords[0]
 }
 
-// To find Waldo Indices we manipulated the DOM Objects.
-// The While Loop helps us index our search for Waldo.
-
 function getWaldoIndices(dataString) {
     let indices = []
     let searchString = "waldo"
@@ -149,4 +135,67 @@ function getWaldoIndices(dataString) {
     return indices
 }
 
+function renderData (dataObject) {
+    let container = document.createElement("div")
+    container.classList.add("container")
+
+    let title = document.createElement("h2")
+    title.append("Text Analysis")
+    container.append(title)
+    
+    let columnContainer = document.createElement("div")
+    columnContainer.classList.add("columnContainer")
+    container.append(columnContainer)
+
+    let leftColummn = document.createElement("div")
+    leftColummn.classList.add("column")
+    container.append(leftColummn)
+
+    let rightColumn = document.createElement("div")
+    rightColumn.classList.add("column")
+    container.append(rightColumn)
+    
+    let vowels = document.createElement("div")
+    vowels.classList.add("column")
+    leftColummn.append(vowels)
+
+    let vowelTitle = document.createElement("h3")
+    vowelTitle.append("Vowel Counts")
+    vowels.append(vowelTitle)
+
+    vowels.append(displayObject(dataObject.vowels))
+   
+    results.append(container)
+}
+
+function displayObject (obj) {
+    let list = document.createElement("ul")
+    for( let property of obj) {
+        let listItem = document.createElement("div")
+        listItem.append(`${property}: ${obj[property]}`)
+        list.append.apply(listItem)
+    }
+    return list 
+}
+
+
+
 textArea.addEventListener("keyup", handleKeyUp)
+
+
+
+// Initial Object to store information
+
+// All credits go to Jon Taylor who made the DataTypes walkthrough video
+
+// Inside a function we created a Switch case.
+// *To make this run the project build.
+// result.variabl must be invoked below the handleKeyUp function.*
+// This is where I got the a-ha moment.
+// I thought that the for loop was enough.
+
+// console.log(wordsArray)
+
+
+// To find Waldo Indices we manipulated the DOM Objects.
+// The While Loop helps us index our search for Waldo.
