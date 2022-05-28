@@ -16,10 +16,10 @@ function handleKeyUp(event) {
             u: 0
         },
         punctuation: {
-            period: 0,
-            comma: 0,
-            exclamation: 0,
-            questionMark: 0
+            "Periods": 0,
+            "Commas": 0,
+            "Exclamation Points": 0,
+            "Questions Marks": 0
         },
         numCharacters: 0,
         numWords: 0,
@@ -37,6 +37,7 @@ function handleKeyUp(event) {
     result.shortestWord = getShortestWord(wordsArray)
     result.lastThreeWords = wordsArray.slice(-3)
     result.waldoIndexes = getWaldoIndices(text)
+    // console.log(wordsArray)
     // console.log(result)
     renderData(result)
 }
@@ -67,25 +68,25 @@ function getVowelsObject(dataString) {
 function getPunctuationObject(dataString) {
     dataString = dataString.toLowerCase()
     let punctuationCounts = {
-        period: 0,
-        comma: 0,
-        exclamation: 0,
-        questionMark: 0
+            "Periods": 0,
+            "Commas": 0,
+            "Exclamation Points": 0,
+            "Questions Marks": 0
     }
     for (let i = 0; i < dataString.length; i += 1) {
         let currentChar = dataString[i]
         switch (currentChar) {
             case ".":
-                punctuationCounts["period"] += 1
+                punctuationCounts["Periods"] += 1
                 break;
             case ",":
-                punctuationCounts["comma"] += 1
+                punctuationCounts["Commas"] += 1
                 break;
             case "!":
-                punctuationCounts["exclamation"] += 1
+                punctuationCounts["Exclamation Points"] += 1
                 break;
             case "?":
-                punctuationCounts["questionMark"] += 1
+                punctuationCounts["Question Marks"] += 1
                 break;
         }
     }
@@ -102,7 +103,7 @@ function getWordsArray(dataString) {
             let filteredChars = []
             for (let i=0; i < charsArray.length; i += 1) {
                 let currentChar = charsArray[i]
-                if (characters.includes(currentChar) == true) {
+                if (characters.includes(currentChar) === true) {
                     filteredChars.push(currentChar)
                 }
             }
@@ -136,6 +137,8 @@ function getWaldoIndices(dataString) {
 }
 
 function renderData (dataObject) {
+    results.replaceChildren()
+
     let container = document.createElement("div")
     container.classList.add("container")
 
@@ -147,24 +150,58 @@ function renderData (dataObject) {
     columnContainer.classList.add("columnContainer")
     container.append(columnContainer)
 
-    let leftColummn = document.createElement("div")
-    leftColummn.classList.add("column")
-    container.append(leftColummn)
+    let leftColumn = document.createElement("div")
+    leftColumn.classList.add("column")
+    columnContainer.append(leftColumn)
 
     let rightColumn = document.createElement("div")
     rightColumn.classList.add("column")
-    container.append(rightColumn)
+    columnContainer.append(rightColumn)
     
     let vowels = document.createElement("div")
     vowels.classList.add("column")
-    leftColummn.append(vowels)
+    leftColumn.append(vowels)
 
     let vowelTitle = document.createElement("h3")
     vowelTitle.append("Vowel Counts")
     vowels.append(vowelTitle)
 
-    vowels.append(displayObject(dataObject.vowels));
-   
+    vowels.append(displayObject(dataObject.vowels))
+    
+    let punctuation = document.createElement("div")
+    punctuation.classList.add("column")
+    leftColumn.append(punctuation)
+
+    let punctTitle = document.createElement("h3")
+    punctTitle.append("Punctuation Counts")
+    punctuation.append(punctTitle)
+
+    punctuation.append(displayObject(dataObject.punctuation))
+
+    let numOfChars = document.createElement("h3")
+    numOfChars.append(`Number of Characters: ${dataObject.numCharacters}`)
+    rightColumn.append(numOfChars)
+
+    let numOfWords = document.createElement("h3")
+    numOfWords.append(`Number of Words: ${dataObject.numWords}`)
+    rightColumn.append(numOfWords)
+
+    let longest = document.createElement("h3")
+    longest.append(`Longest Word: ${dataObject.longestWord}`)
+    rightColumn.append(longest)
+    
+    let shortest = document.createElement("h3")
+    shortest.append(`Shortest Word: ${dataObject.shortestWord}`)
+    rightColumn.append(shortest)
+
+    let lastThree = document.createElement("h3")
+    lastThree.append(`Last Three Words: ${dataObject.lastThreeWords}`)
+    rightColumn.append(lastThree)
+
+    let waldos = document.createElement("h3")
+    waldos.append(`Waldo Indexes: ${dataObject.waldoIndexes}`)
+    rightColumn.append(waldos)
+    
     results.append(container)
 }
 
