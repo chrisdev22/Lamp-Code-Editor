@@ -1,5 +1,5 @@
-# Kenzie Academy JavaScript Assignment
+Lamp Code Editor
 
-Complete your work inside of `code.js`
+Developing code with refactoring to provide user-readable solutions. I learned that every if statement should carry a Switch case to work on each string individually. I found certain bug errors along the way while coding and noticed that VSCode's IntelliSense is tricky while writing lines of code. 
 
-Follow the instructions provided on my.kenzie.academy for this assignment.
+It may add attributes that could render the program with errors if not read carefully. I always double-check it as well to identify potential logic and compilation errors.
